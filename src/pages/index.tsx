@@ -5,9 +5,7 @@ export default function Home() {
   return (
    <>
    <Head>Starting | Ig News</Head>
-   <div >hellou
    
-   </div>
    </>
   )
 }
