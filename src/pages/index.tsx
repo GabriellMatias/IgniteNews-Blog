@@ -1,7 +1,13 @@
+import Head from 'next/head'
 
 
 export default function Home() {
   return (
-   <div>hellou</div>
+   <>
+   <Head>Starting | Ig News</Head>
+   <div >hellou
+   
+   </div>
+   </>
   )
 }
