@@ -3,11 +3,12 @@ import { Header } from '../Components/Header'
 import '../styles/global.scss'
 
 /* cada arquivo criado na pasta pages, ele cria uma rota para esse componente 
-automaticamente. beneficios do NEXT*/
+automaticamente. beneficios do NEXT */
 export default function App({ Component, pageProps }: AppProps) {
-  return( 
+  return (
     <>
-  <Header/>
-  <Component {...pageProps} />
-  </>
-  )}
+      <Header />
+      <Component {...pageProps} />
+    </>
+  )
+}

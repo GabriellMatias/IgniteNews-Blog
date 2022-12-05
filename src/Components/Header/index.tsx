@@ -1,17 +1,17 @@
 import { SignInButton } from '../SignInButton'
 import styles from './styles.module.scss'
 
-export function Header(){
-  return(
+export function Header() {
+  return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
-         {/* imagens sempre na pasta public */}
+        {/* imagens sempre na pasta public */}
         <img src="/images/logo.svg" alt="ig.news" />
         <nav>
           <a className={styles.active}>Home</a>
           <a>Posts</a>
         </nav>
-        <SignInButton/>
+        <SignInButton />
       </div>
     </header>
   )
