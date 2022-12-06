@@ -6,7 +6,6 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 export function SignInButton() {
   /* retorna se o user ta logado ou nao automaticamente */
   const { data: session } = useSession()
-  console.log(session)
 
   return session ? (
     <button
