@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, response: NextApiResponse) => {
 
     if (!session?.user?.email || !session?.user?.name) {
       return response.status(400).json({
-        message: 'Logged user does not have an e-mail',
+        message: 'Logged user does not have an e-mail or name',
       })
     }
 
