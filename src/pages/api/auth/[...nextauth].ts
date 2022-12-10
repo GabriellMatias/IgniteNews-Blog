@@ -18,6 +18,34 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    async session({ session }: any) {
+      try {
+        const userActiveSubscription = await fauna.query<string>(
+          q.Get(
+            q.Intersection([
+              q.Match(
+                q.Index('subscription_by_user_ref'),
+                /* como nao tem acesso ao user ref aqui, usamos o email do usuario para 
+                buscar ele, selecioona a REF buscando o usuario pelo email */
+                q.Select(
+                  'ref',
+                  q.Get(
+                    q.Match(
+                      q.Index('user_by_email'),
+                      q.Casefold(session.user.email),
+                    ),
+                  ),
+                ),
+              ),
+              q.Match(q.Index('subscription_by_status'), 'active'),
+            ]),
+          ),
+        )
+        return { ...session, activeSubscription: userActiveSubscription }
+      } catch (error) {
+        return { ...session, activeSubscription: null }
+      }
+    },
     async signIn({ user, account, profile }: any /* ARRUMAR */) {
       const { email } = user
       try {
