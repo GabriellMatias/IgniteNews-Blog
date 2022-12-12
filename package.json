@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@prismicio/client": "5.1.1",
-    "@prismicio/helpers": "^2.3.6",
-    "@prismicio/react": "^2.5.0",
     "@prismicio/slice-simulator-react": "^0.2.2",
     "@stripe/stripe-js": "^1.46.0",
     "@types/node": "18.11.10",
