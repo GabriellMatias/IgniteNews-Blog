@@ -16,8 +16,8 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
   async function handleSubscribe() {
     /* validando se ele esta logado para se inscrever */
     if (!session) {
-      signIn('github')
       toast.error('You need to login firt')
+      signIn('github')
     }
     /* se ja tiver uma inscricao ativa ele nao pode fazer outra, entao
     redireciono ele para a pagina de postss */
