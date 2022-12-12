@@ -1,5 +1,6 @@
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 import { api } from '../../services/api'
 import { getStripeJS } from '../../services/stripe-js'
 import styles from './styles.module.scss'
@@ -33,7 +34,8 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
 
       await stripe?.redirectToCheckout({ sessionId })
     } catch (error) {
-      alert(error)
+      console.log(error)
+      toast.error('You need to login first')
     }
   }
 
