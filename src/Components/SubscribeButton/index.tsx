@@ -17,6 +17,7 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
     /* validando se ele esta logado para se inscrever */
     if (!session) {
       signIn('github')
+      toast.error('You need to login firt')
     }
     /* se ja tiver uma inscricao ativa ele nao pode fazer outra, entao
     redireciono ele para a pagina de postss */
@@ -34,8 +35,7 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
 
       await stripe?.redirectToCheckout({ sessionId })
     } catch (error) {
-      console.log(error)
-      toast.error('You need to login first')
+      alert(error)
     }
   }
 
