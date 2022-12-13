@@ -12,12 +12,17 @@ interface SubscribeButtonProps {
 export function SubscribeButton({ priceId }: SubscribeButtonProps) {
   const { data: session } = useSession()
   const router = useRouter()
+  const sleep = (milliseconds: number) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds))
+  }
 
   async function handleSubscribe() {
     /* validando se ele esta logado para se inscrever */
     if (!session) {
-      toast.error('You need to login firt')
+      toast.error('You need to login first, We are redirecting you')
+      await sleep(2000)
       signIn('github')
+      return
     }
     /* se ja tiver uma inscricao ativa ele nao pode fazer outra, entao
     redireciono ele para a pagina de postss */
@@ -35,7 +40,8 @@ export function SubscribeButton({ priceId }: SubscribeButtonProps) {
 
       await stripe?.redirectToCheckout({ sessionId })
     } catch (error) {
-      alert(error)
+      toast.error('Something get Wrong, take a look ate console')
+      console.log(error)
     }
   }
 
