@@ -1,34 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<br />
+<div align="center">
+  <img style="margin-top:100px;" src="https://user-images.githubusercontent.com/80908772/207341261-73769e97-4002-484e-886e-e2a0876385ac.png"/>
 
-First, run the development server:
+  <h3 align="center">Ig News</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+  <p align="center">
+    A project developer during React curse Provider by Rocketseat
+    <br />
+  </p>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## :arrow_forward: Getting Started
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+To use this project you nedd to have node install in your machine and Stripe-CLI in the directory of your project.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Installation and Usage
 
-## Learn More
+1. run "Npm install" to install Dependencies
+2. Start aplication running "Npm run dev"
+3. Start Stripe server with "./Stripe --forward-to localhost:3000/api/webhooks"
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Owerview
+The biggest project i ever made. This is a E-commerce, You can buy the subscription to have access to the blog post.
+However to do this you must be logged in with github. This application has connections with the github API to log in, FaunaDb to store user data and registrations, and connects with Stripe to make and validate the payment of each user. And Finally, i use PrismicIO to store posts data <br/>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## :hammer: Tools
+-[React](https://pt-br.reactjs.org)<br/>
+-[TypeScript](https://www.typescriptlang.org)<br/>
+-[Eslint](https://eslint.org)<br/>
+-[Stripe](https://stripe.com/br)<br/>
+-[Fauna-DB](https://fauna.com)<br/>
+-[PrismicIO](https://prismic.io)<br/>
 
-## Deploy on Vercel
+## :clipboard: RoadMap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] Connect user with github API
+- [x] Show preview pages to anyone
+- [x] Let the user make his subscription
+- [x] Let only subscribers see all posts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## :camera: ScreenShots
+<h1 aling="center">
+  
+  <img style="margin-top:100px;" src="https://user-images.githubusercontent.com/80908772/207341244-f08b2ddc-bdc6-4bb8-9d6b-d233595b1dfc.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341269-298fe7a4-b2f0-4e64-9e9f-6e30d3ca0f21.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341301-8e060784-8e75-4584-9ca1-b7b36b988ba3.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341275-5a173ca9-f9c5-4878-9419-f78e698448aa.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341283-47913f3b-171d-4e2f-9037-b4ea125514c3.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341297-7f461b7a-f1df-49a8-acdc-6e6ee3750a40.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341288-1424eb97-ac08-4ac5-a845-0e584533909a.png"/>
+  <hr/>
+  <img style="margin-top:10px;" src="https://user-images.githubusercontent.com/80908772/207341292-7663af8f-ce6e-46ed-9fad-bb8fc86da742.png"/>
+  <hr/>
+</h1>
+<br/>
+
+<a href='#top'>
+:arrow_up: Back to top
+</a>
+
+<hr/>
+
+<footer>
+  <p align="right">
+    Developer by Gabriell Matias
+  </p>
+</footer>
+
+
+
