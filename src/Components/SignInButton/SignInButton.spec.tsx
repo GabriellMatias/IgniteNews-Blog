@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { SignInButton } from '.'
 import { useSession } from 'next-auth/react'
-import { mocked } from 'jest-mock'
 
 /* Fazendo um retorno ficticio para as funcoes que so funcionam com o codigo rodando
  */
