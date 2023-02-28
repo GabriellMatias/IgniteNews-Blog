@@ -22,7 +22,7 @@ export function SubscribeButton() {
     }
     /* se ja tiver uma inscricao ativa ele nao pode fazer outra, entao
     redireciono ele para a pagina de postss */
-    if (session?.activeSubscription) {
+    if (session.activeSubscription) {
       router.push('/posts')
       return
     }
@@ -36,7 +36,7 @@ export function SubscribeButton() {
 
       await stripe?.redirectToCheckout({ sessionId })
     } catch (error) {
-      toast.error('Something get Wrong, take a look ate console')
+      toast.error('Something get Wrong, take a look at console')
       console.log(error)
     }
   }

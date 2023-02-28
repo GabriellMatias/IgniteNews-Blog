@@ -20,6 +20,11 @@ jest.mock('next/router', () => ({
   }),
 }))
 
+/* Resolveu o erro por estar renderizando o componente antes e deixando realizar 
+so testes
+ */
+render(<SubscribeButton />)
+
 describe('SubscribeButton component tests', () => {
   it('SubscribeButton renders correctly', () => {
     const useSessionMocked = jest.mocked(useSession)
@@ -30,14 +35,16 @@ describe('SubscribeButton component tests', () => {
     expect(getByText('Subscribe Now')).toBeInTheDocument()
   })
 
-  it('redirects user to signIn when not authenticated', () => {
-    render(<SubscribeButton />)
+  it('redirect user to signIn when not authenticated', () => {
+    const signInMocked = jest.mocked(signIn)
 
-    /* Disparando evento para simular click do usuario no botao de signIn */
-    const subscribeButton = screen.getByText('Subscribe Now')
+    /* Melhor utilizar o getbyRole sempre
+     */
+    const subscribeButton = screen.getByRole('button', {
+      name: /'Subscribe now'/i,
+    })
     fireEvent.click(subscribeButton)
 
-    const signInMocked = jest.mocked(signIn)
     expect(signInMocked).toHaveBeenCalled()
   })
 
