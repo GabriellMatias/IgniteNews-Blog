@@ -1,29 +1,15 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { SubscribeButton } from '.'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 jest.mock('next-auth/react')
 
-jest.mock('next/router', () => {
-  return {
-    useRouter() {
-      return {
-        asPath: '/',
-      }
-    },
-  }
-})
 jest.mock('next/router', () => ({
   useRouter: jest.fn().mockReturnValue({
     push: jest.fn(),
   }),
 }))
-
-/* Resolveu o erro por estar renderizando o componente antes e deixando realizar 
-so testes
- */
-render(<SubscribeButton />)
 
 describe('SubscribeButton component tests', () => {
   it('SubscribeButton renders correctly', () => {
@@ -36,16 +22,25 @@ describe('SubscribeButton component tests', () => {
   })
 
   it('redirect user to signIn when not authenticated', () => {
+    const useSessionMocked = jest.mocked(useSession)
+
+    useSessionMocked.mockReturnValueOnce({ data: null, status: 'loading' })
+
     const signInMocked = jest.mocked(signIn)
+
+    render(<SubscribeButton />)
 
     /* Melhor utilizar o getbyRole sempre
      */
     const subscribeButton = screen.getByRole('button', {
-      name: /'Subscribe now'/i,
+      name: 'Subscribe Now',
     })
+
     fireEvent.click(subscribeButton)
 
-    expect(signInMocked).toHaveBeenCalled()
+    waitFor(() => expect(signInMocked).toHaveBeenCalled(), {
+      timeout: 2000,
+    })
   })
 
   it('redirect user to posts when has a active subscription', () => {
