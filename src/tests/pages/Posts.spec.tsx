@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
-import Posts, { getStaticProps } from '../../pages/posts'
-import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
-import { stripe } from '../../services/stripe'
+import Posts, { getStaticProps } from '../../pages/posts'
+import { getPrismicClient } from '../../services/prismic'
+
+jest.mock('next-auth/react')
 
 const posts = [
   {
@@ -14,42 +15,53 @@ const posts = [
   },
 ]
 
+jest.mock('../../services/prismic')
+
 describe('Posts Page', () => {
   it('renders correctly', () => {
-    const useRouterMocked = jest.mocked(useRouter)
     const useSessionMocked = jest.mocked(useSession)
-    const pushMocked = jest.fn()
-    useSessionMocked.mockReturnValueOnce({
-      data: {
-        user: {
-          name: 'John Doe',
-          email: 'john.doe@exemple.com',
-        },
-        activeSubscription: 'fake-active-subscription',
-        expires: 'fake-expires',
-      },
-    } as any)
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMocked,
-    } as any)
+    useSessionMocked.mockReturnValueOnce({ data: null, status: 'loading' })
 
     render(<Posts post={posts} />)
 
-    expect(screen.getByText('for R$10,00 month')).toBeInTheDocument()
+    expect(screen.getByText('my new post')).toBeInTheDocument()
   })
-  // it('loads initial data', async () => {
-  //   const retrievePriceStripeMocked = jest.mocked(stripe.prices.retrieve)
-  //   retrievePriceStripeMocked.mockResolvedValueOnce({
-  //     id: 'fake-price',
-  //     unit_amount: 1000,
-  //   } as any)
+  it('loads initial data', async () => {
+    const getPrismicClientMocked = jest.mocked(getPrismicClient)
+    getPrismicClientMocked.mockReturnValueOnce({
+      query: jest.fn().mockResolvedValueOnce({
+        results: [
+          {
+            uid: 'my-new-post',
+            data: {
+              title: [{ type: 'heading', text: 'My New Post' }],
+              content: [
+                {
+                  type: 'paragraph',
+                  text: 'Post Excerpt',
+                },
+              ],
+            },
+            last_publication_date: '04-01-2021',
+          },
+        ],
+      }),
+    } as any)
 
-  //   const response = await getStaticProps({})
-  //   console.log(response)
-  //   expect(response).toEqual(
-  //     expect.objectContaining({
-  //       props: { product: { priceId: 'fake-price', amount: '$10.00' } },
-  //     }),
-  //   )
-  // })
+    const response = await getStaticProps({})
+    expect(response).toEqual(
+      expect.objectContaining({
+        props: {
+          post: [
+            {
+              slug: 'my-new-post',
+              title: 'My New Post',
+              resume: 'Post Excerpt',
+              updatedAt: '01 de abril de 2021',
+            },
+          ],
+        },
+      }),
+    )
+  })
 })
